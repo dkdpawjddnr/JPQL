@@ -2,6 +2,8 @@ package hellojpa.jpql;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 public class JpaMain {
 
     public static void main(String[] args) {
@@ -20,6 +22,16 @@ public class JpaMain {
             TypedQuery<Member> query1 = em.createQuery("select m from Member m", Member.class);
             TypedQuery<String> query2 = em.createQuery("select m.username from Member m" , String.class);
             Query query3 = em.createQuery("select m.username, m.age from Member m");
+
+            // 결과가 하나 이상일 때, 리스트 반환
+            List<Member> resultList = query1.getResultList();
+            for (Member member1 : resultList){
+                System.out.println("Member = " + member1);
+            }
+
+            // 결과가 정확히 하나일 때
+            Member member2 = query1.getSingleResult();
+            System.out.println("member2 = " + member2);
 
             tx.commit();
         } catch (Exception e){
