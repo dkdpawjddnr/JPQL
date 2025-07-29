@@ -28,7 +28,9 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select m from Member m left join m.team t";
+            //JPQL 서브쿼리의 한계 : FROM 절의 서브 쿼리는 불가능
+            // -> 해결방법으로는 조인으로 풀 수 있으면 풀어서 해결하기.
+            String query = "select m from (select m.age from Member m) as mm";
             List<Member> result = em.createQuery(query, Member.class)
                             .getResultList();
 
