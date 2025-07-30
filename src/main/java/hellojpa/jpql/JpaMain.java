@@ -29,16 +29,19 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select m.username, 'HELLO', true From Member m " +
-                            "where m.type = :userType";
-            List<Object[]> result = em.createQuery(query)
-                    .setParameter("userType", MemberType.ADMIN)
-                    .getResultList();
+            String query =
+                    "select " +
+                            "case when m.age <= 10 then '학생요금' " +
+                            "      when m.age >= 60 then '경로요금' " +
+                            "      else '일반요금' " +
+                            " end " +
+                            "from Member m";
 
-            for (Object[] objects : result){
-                System.out.println("objects = " + objects[0]);
-                System.out.println("objects = " + objects[1]);
-                System.out.println("objects = " + objects[2]);
+            List<String> result = em.createQuery(query, String.class)
+                            .getResultList();
+
+            for (String s : result){
+                System.out.println("s = " + s);
             }
 
             tx.commit();
