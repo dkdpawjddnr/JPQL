@@ -29,11 +29,12 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select substring(m.username, 2,3) From Member m";
-            List<String> result = em.createQuery(query, String.class)
+            //특정 문자 위치 찾아주기
+            String query = "select locate('de', 'abcdefg') From Member m";
+            List<Integer> result = em.createQuery(query, Integer.class)
                             .getResultList();
 
-            for (String s : result){
+            for (Integer s : result){
                 System.out.println("s = " + s);
             }
 
