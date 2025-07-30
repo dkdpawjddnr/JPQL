@@ -29,7 +29,7 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query = "select concat('a', 'b') From Member m";
+            String query = "select substring(m.username, 2,3) From Member m";
             List<String> result = em.createQuery(query, String.class)
                             .getResultList();
 
