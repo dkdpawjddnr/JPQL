@@ -29,8 +29,8 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            //특정 문자 위치 찾아주기
-            String query = "select locate('de', 'abcdefg') From Member m";
+            // 컬렉션의 크기를 확인
+            String query = "select size(t.members) From Team m";
             List<Integer> result = em.createQuery(query, Integer.class)
                             .getResultList();
 
