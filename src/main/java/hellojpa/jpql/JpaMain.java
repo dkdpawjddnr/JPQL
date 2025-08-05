@@ -40,9 +40,10 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            em.createNamedQuery("Member.findByUsername", Member.class)
-                            .setParameter("username", "회원1")
-                            .getResultList();
+            int resultCount = em.createQuery("update Member m set m.age = 20")
+                    .executeUpdate();
+
+            System.out.println("resultCount = " + resultCount);
 
             tx.commit();
         } catch (Exception e){
