@@ -8,7 +8,7 @@ import jakarta.persistence.*;
         query = "select m from Member m where m.username =: username"
 )
 public class Member {
-
+    
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String username;
